@@ -123,7 +123,7 @@
     <dependency>
       <groupId>com.google.closure</groupId>
       <artifactId>soy</artifactId>
-      <version>2012-22-12</version>
+      <version>2016-08-25</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
