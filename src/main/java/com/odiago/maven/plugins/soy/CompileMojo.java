@@ -5,9 +5,9 @@
  * licenses this file to you under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
@@ -39,140 +39,155 @@ import java.util.Map;
  * @goal compile
  * @phase process-sources
  */
-public class CompileMojo extends AbstractMojo {
-  /**
-   * The soy files to be compiled into javascript files.
-   *
-   * @parameter property="inputFiles"
-   * @required
-   */
-  private FileSet mInputFiles;
+public class CompileMojo extends AbstractMojo
+{
+	/**
+	 * The soy files to be compiled into javascript files.
+	 *
+	 * @parameter property="inputFiles"
+	 * @required
+	 */
+	private FileSet mInputFiles;
 
-  /**
-   * The target directory for generated javascript files.
-   *
-   * @parameter property="outputDirectory" expression="${soy.output.directory}" default-value="${project.build.directory}/generated-js/soy"
-   * @required
-   */
-  private File mOutputDirectory;
+	/**
+	 * The target directory for generated javascript files.
+	 *
+	 * @parameter property="outputDirectory" expression="${soy.output.directory}" default-value="${project.build.directory}/generated-js/soy"
+	 * @required
+	 */
+	private File mOutputDirectory;
 
-  /**
-   * Whether to generate code with provide/require soy namespaces for Google Closure Compiler
-   * integration.
-   *
-   * @parameter property="shouldProvideRequireSoyNamespaces" default-value="false"
-   */
-  private boolean mShouldProvideRequireSoyNamespaces;
+	/**
+	 * Whether to generate code with provide/require soy namespaces for Google Closure Compiler
+	 * integration.
+	 *
+	 * @parameter property="shouldProvideRequireSoyNamespaces" default-value="false"
+	 */
+	private boolean mShouldProvideRequireSoyNamespaces;
 
-  /**
-   * Whether to generate Jsdoc compatible for Google Closure Compiler integration.
-   *
-   * @parameter property="shouldGenerateJsdoc" default-value="false"
-   */
-  private boolean mShouldGenerateJsdoc;
+	/**
+	 * Whether to generate Jsdoc compatible for Google Closure Compiler integration.
+	 *
+	 * @parameter property="shouldGenerateJsdoc" default-value="false"
+	 */
+	private boolean mShouldGenerateJsdoc;
 
-  /**
-   * Compile time globals to bind in the templates.
-   *
-   * @parameter property="globals"
-   */
-  private Map<String, String> mCompileTimeGlobals = Collections.emptyMap();
+	/**
+	 * Compile time globals to bind in the templates.
+	 *
+	 * @parameter property="globals"
+	 */
+	private Map<String, String> mCompileTimeGlobals = Collections.emptyMap();
 
-  /**
-   * Sets the input soy files to compile.
-   *
-   * @param inputFiles An input file set.
-   */
-  public void setInputFiles(FileSet inputFiles) {
-    mInputFiles = inputFiles;
-  }
+	/**
+	 * Sets the input soy files to compile.
+	 *
+	 * @param inputFiles An input file set.
+	 */
+	public void setInputFiles(FileSet inputFiles)
+	{
+		mInputFiles = inputFiles;
+	}
 
-  /**
-   * Sets the target directory for generated javascript files.
-   *
-   * @param outputDirectory A directory.
-   */
-  public void setOutputDirectory(File outputDirectory) {
-    mOutputDirectory = outputDirectory;
-  }
+	/**
+	 * Sets the target directory for generated javascript files.
+	 *
+	 * @param outputDirectory A directory.
+	 */
+	public void setOutputDirectory(File outputDirectory)
+	{
+		mOutputDirectory = outputDirectory;
+	}
 
-  /**
-   * Sets whether to generate code with provide/require soy namespaces
-   * for Google Closure Compiler integration.
-   *
-   * @param shouldProvideRequireSoyNamespaces Whether to add provide/require statements.
-   */
-  public void setShouldProvideRequireSoyNamespaces(boolean shouldProvideRequireSoyNamespaces) {
-    mShouldProvideRequireSoyNamespaces = shouldProvideRequireSoyNamespaces;
-  }
+	/**
+	 * Sets whether to generate code with provide/require soy namespaces
+	 * for Google Closure Compiler integration.
+	 *
+	 * @param shouldProvideRequireSoyNamespaces Whether to add provide/require statements.
+	 */
+	public void setShouldProvideRequireSoyNamespaces(boolean shouldProvideRequireSoyNamespaces)
+	{
+		mShouldProvideRequireSoyNamespaces = shouldProvideRequireSoyNamespaces;
+	}
 
-  /**
-   * Sets whether Jsdoc should be generated.
-   *
-   * @param shouldGenerateJsdoc Whether to generate Jsdoc.
-   */
-  public void setShouldGenerateJsdoc(boolean shouldGenerateJsdoc) {
-    mShouldGenerateJsdoc = shouldGenerateJsdoc;
-  }
+	/**
+	 * Sets whether Jsdoc should be generated.
+	 *
+	 * @param shouldGenerateJsdoc Whether to generate Jsdoc.
+	 */
+	public void setShouldGenerateJsdoc(boolean shouldGenerateJsdoc)
+	{
+		mShouldGenerateJsdoc = shouldGenerateJsdoc;
+	}
 
-  /**
-   * Sets the compile bime globals to bind in the templates.
-   *
-   * @param globals Variable name to value bindings.
-   */
-  public void setGlobals(Map<String, String> globals) {
-    mCompileTimeGlobals = globals;
-  }
+	/**
+	 * Sets the compile bime globals to bind in the templates.
+	 *
+	 * @param globals Variable name to value bindings.
+	 */
+	public void setGlobals(Map<String, String> globals)
+	{
+		mCompileTimeGlobals = globals;
+	}
 
-  /**
-   * Gets the set of input soy templates.
-   *
-   * @return The soy files to compile into javascript files.
-   */
-  private SoyFileSet getInputFileSet() {
-    SoyFileSet.Builder soyFileSetBuilder = SoyFileSet.builder()
-        .setCompileTimeGlobals(mCompileTimeGlobals);
+	/**
+	 * Gets the set of input soy templates.
+	 *
+	 * @return The soy files to compile into javascript files.
+	 */
+	private SoyFileSet getInputFileSet()
+	{
+		SoyFileSet.Builder soyFileSetBuilder = SoyFileSet.builder()
+				.setCompileTimeGlobals(mCompileTimeGlobals);
 
-    FileSetManager fileSetManager = new FileSetManager(getLog());
-    for (String filename : fileSetManager.getIncludedFiles(mInputFiles)) {
-      File soyFile = new File(mInputFiles.getDirectory(), filename);
-      getLog().info("Including soy file: " + soyFile);
-      soyFileSetBuilder.add(soyFile);
-    }
-    return soyFileSetBuilder.build();
-  }
+		FileSetManager fileSetManager = new FileSetManager(getLog());
+		for (String filename : fileSetManager.getIncludedFiles(mInputFiles))
+		{
+			File soyFile = new File(mInputFiles.getDirectory(), filename);
+			getLog().info("Including soy file: " + soyFile);
+			soyFileSetBuilder.add(soyFile);
+		}
+		return soyFileSetBuilder.build();
+	}
 
-  /** {@inheritDoc} */
-  @Override
-  public void execute() throws MojoExecutionException {
-    getLog().info("Compiling soy templates...");
+	/** {@inheritDoc} */
+	@Override
+	public void execute() throws MojoExecutionException
+	{
+		getLog().info("Compiling soy templates...");
 
-    SoyFileSet soyFileSet = getInputFileSet();
-    SoyJsSrcOptions jsSrcOptions = new SoyJsSrcOptions();
-    jsSrcOptions.setShouldProvideRequireSoyNamespaces(mShouldProvideRequireSoyNamespaces);
-    jsSrcOptions.setShouldGenerateJsdoc(mShouldGenerateJsdoc);
-    List<String> compiledSrcs = soyFileSet.compileToJsSrc(jsSrcOptions, null);
+		SoyFileSet soyFileSet = getInputFileSet();
+		SoyJsSrcOptions jsSrcOptions = new SoyJsSrcOptions();
+		jsSrcOptions.setShouldProvideRequireSoyNamespaces(mShouldProvideRequireSoyNamespaces);
+		jsSrcOptions.setShouldGenerateJsdoc(mShouldGenerateJsdoc);
+		List<String> compiledSrcs = soyFileSet.compileToJsSrc(jsSrcOptions, null);
 
-    FileSetManager fileSetManager = new FileSetManager(getLog());
-    String[] inputFilenames = fileSetManager.getIncludedFiles(mInputFiles);
-    assert inputFilenames.length == compiledSrcs.size();
-    if (mOutputDirectory.mkdirs()) {
-      getLog().info("Created output directory: " + mOutputDirectory);
-    }
-    for (int i = 0; i < inputFilenames.length; i++) {
-      File outputFile = new File(mOutputDirectory, inputFilenames[i] + ".js");
-      getLog().info("Writing compiled soy: " + outputFile);
-      Writer writer = null;
-      try {
-        if (outputFile.createNewFile()) {
-          getLog().info("Created new file: " + outputFile);
-        }
-        writer = new FileWriter(outputFile);
-        writer.write(compiledSrcs.get(i));
-        writer.flush();
-      } catch (IOException e) {
-        IOUtils.closeQuietly(writer);
-      }
-    }
-  }
+		FileSetManager fileSetManager = new FileSetManager(getLog());
+		String[] inputFilenames = fileSetManager.getIncludedFiles(mInputFiles);
+		assert inputFilenames.length == compiledSrcs.size();
+		if (mOutputDirectory.mkdirs())
+		{
+			getLog().info("Created output directory: " + mOutputDirectory);
+		}
+		for (int i = 0; i < inputFilenames.length; i++)
+		{
+			File outputFile = new File(mOutputDirectory, inputFilenames[i] + ".js");
+			getLog().info("Writing compiled soy: " + outputFile);
+			Writer writer = null;
+			try
+			{
+				if (outputFile.createNewFile())
+				{
+					getLog().info("Created new file: " + outputFile);
+				}
+				writer = new FileWriter(outputFile);
+				writer.write(compiledSrcs.get(i));
+				writer.flush();
+			}
+			catch (IOException e)
+			{
+				IOUtils.closeQuietly(writer);
+			}
+		}
+	}
 }
