@@ -1,9 +1,0 @@
-# Build artifacts.
-target/
-
-# IDE files.
-.jde/
-prj.el
-
-# Editor files.
-*~
