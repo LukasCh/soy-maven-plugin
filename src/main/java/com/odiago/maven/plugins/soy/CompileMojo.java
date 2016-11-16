@@ -17,14 +17,6 @@
 
 package com.odiago.maven.plugins.soy;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.jssrc.SoyJsSrcOptions;
 import org.apache.commons.io.IOUtils;
@@ -32,6 +24,14 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.shared.model.fileset.FileSet;
 import org.apache.maven.shared.model.fileset.util.FileSetManager;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A maven goal for compiling soy templates (Google Closure Templates) into javascript files.
@@ -130,7 +130,7 @@ public class CompileMojo extends AbstractMojo {
    * @return The soy files to compile into javascript files.
    */
   private SoyFileSet getInputFileSet() {
-    SoyFileSet.Builder soyFileSetBuilder = new SoyFileSet.Builder()
+    SoyFileSet.Builder soyFileSetBuilder = SoyFileSet.builder()
         .setCompileTimeGlobals(mCompileTimeGlobals);
 
     FileSetManager fileSetManager = new FileSetManager(getLog());
