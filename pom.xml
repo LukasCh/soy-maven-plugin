@@ -15,7 +15,8 @@
    implied.  See the License for the specific language governing
    permissions and limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4_0_0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.odiago.maven.plugins</groupId>
@@ -41,11 +42,11 @@
   </licenses>
 
   <properties>
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <scm.connection>scm:git:ssh://git@github.com/wibidata/soy-maven-plugin.git</scm.connection>
+    <github.global.server>github</github.global.server>
   </properties>
 
   <build>
@@ -110,6 +111,22 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.12</version>
+        <configuration>
+          <message>Creating site for ${project.version}</message>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>site</goal>
+            </goals>
+            <phase>site</phase>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -121,10 +138,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.google.closure</groupId>
+      <groupId>com.google.template</groupId>
       <artifactId>soy</artifactId>
       <version>2016-08-25</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -192,41 +208,4 @@
     </plugins>
   </reporting>
 
-  <distributionManagement>
-    <repository>
-      <id>odiago-maven</id>
-      <name>odiago-maven-releases</name>
-      <url>http://maven.odiago.com:8081/artifactory/maven-plugins-releases</url>
-    </repository>
-    <snapshotRepository>
-      <id>odiago-maven</id>
-      <name>odiago-maven-snapshots</name>
-      <url>http://maven.odiago.com:8081/artifactory/maven-plugins-snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
-
-  <scm>
-    <connection>${scm.connection}</connection>
-    <url>${scm.connection}</url>
-    <developerConnection>${scm.connection}</developerConnection>
-  </scm>
-
-  <profiles>
-    <profile>
-      <id>repo.odiago.com</id>
-      <distributionManagement>
-        <!-- Public maven repository. -->
-        <repository>
-          <id>repo.odiago.com</id>
-          <name>repo.odiago.com-releases</name>
-          <url>https://repo.odiago.com/artifactory/wibi</url>
-        </repository>
-        <snapshotRepository>
-          <id>repo.odiago.com</id>
-          <name>repo.odiago.com-snapshots</name>
-          <url>https://repo.odiago.com/artifactory/wibi</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
-  </profiles>
 </project>
